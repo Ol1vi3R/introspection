@@ -1,5 +1,19 @@
 # Introspection
 
+Copyright 2024 Introspection
+
+![PYTHON3.10.12](https://img.shields.io/badge/Python-3.10.12-green.svg?longCache=true&style=for-the-badge)
+
+**ONLY DOWNLOAD IT HERE, DO NOT TRUST OTHER PLACES.**
+
+This is the official and only repository of the Introspection project.
+
+Written by: Ol1vi3R - Twitter: [@Jiunsa_](https://twitter.com/Jiunsa_), GitHub: [@Ol1vi3R](https://github.com/Ol1vi3R)
+
+DISCLAIMER: This program is intended for educational or security auditing purposes on systems for which you have authorization to perform testing. Using this program on systems without authorization may be unlawful. The author is not responsible for any misuse or illegal use of this program.
+
+This project is licensed under the BSD 3-Clause "New" or "Revised" License. See the LICENSE file for more details. 
+
 ## Description
 Introspection is a Python program designed to test all possible pages from a given URL to discover all available paths.
 
@@ -35,11 +49,5 @@ The program utilizes a pre-established list of keywords, along with HTTP request
    ```bash
    python3 introspection.py https://example.com
    ```
-## Disclaimer
-   This program is intended for educational or security auditing purposes on systems for which you have authorization to perform testing. Using this program on systems without authorization may be unlawful. The author is not responsible for any misuse or illegal use of this program.
 
-## Author
-   This program was developed by Ol1vi3R.
 
-## License
-   This project is licensed under the BSD 3-Clause "New" or "Revised" License. See the LICENSE file for more details.
