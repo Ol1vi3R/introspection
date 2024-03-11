@@ -72,7 +72,6 @@ user_agents = [
     'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0'
 
 ]
-
 print_lock = Lock()
 def scan_url(wordlist_slice, base_url, progress_bar):
     global score_200
@@ -99,7 +98,6 @@ def scan_url(wordlist_slice, base_url, progress_bar):
             pass
         finally:
             progress_bar.update(1)
-
 def scanner(url):
     with open('wordlist.txt', 'r') as file:
         wordlist = file.read().splitlines()
@@ -111,23 +109,15 @@ def scanner(url):
         with ThreadPoolExecutor(max_workers=num_threads) as executor:
             for wordlist_slice in wordlist_slices:
                 executor.submit(scan_url, wordlist_slice, url, progress_bar)
-
-    
-    
-
 def url_resolve(url):
     domain = urlparse(url).netloc
     return domain
-
 def url_resolve_path(url):
     path = urlparse(url).path
     return path
-
 def get_ip_address(domain):
     ip_address = socket.gethostbyname(domain)
     return ip_address
-
-
 def r():
     if len(sys.argv) < 2:
         print("Usage: {} <TargetURL>".format(sys.argv[0]))
@@ -141,7 +131,6 @@ def r():
         else:
             print("Usage: {} <TargetURL>".format(sys.argv[0]))
             print(RED+"-------- Invalid URL --------"+RESET)
-
 def url_existe(url):
     b=False
     try:
@@ -152,7 +141,6 @@ def url_existe(url):
     except:
         pass
     return b
-
 def isValideUrl(url):
     regex = re.compile(
         r'^(?:http|ftp)s?://'
@@ -160,7 +148,6 @@ def isValideUrl(url):
         r'(?:[\dA-Za-z-]+\.)+[A-Za-z]{2,6}'
         r'(?:/?|[/?]\S+)$', re.IGNORECASE)
     return re.match(regex, url) is not None
-
 def show(url):
     os.system('cls' if os.name == 'nt' else 'clear')
     if url.endswith('/'):
