@@ -72,23 +72,7 @@ user_agents = [
     'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0'
 
 ]
-def gen_ip():
-    octets = [str(random.randint(0, 255)) for _ in range(4)]
-    ip_address = ".".join(octets)
-    return ip_address
 
-
-
-# Définir une fonction pour le thread de spoofing
-def spoof_thread(target_ip, target_port, path, domain):
-    spoofed_ip = gen_ip()
-    http_get = (
-        IP(src=spoofed_ip, dst=target_ip)
-        / TCP(dport=target_port)
-        / Raw(f"GET {path} HTTP/1.1\r\nHost: {domain}\r\nX-Forwarded-For: {spoofed_ip}\r\n\r\n")
-    )
-    conf.verb = 0
-    send(http_get)
 print_lock = Lock()
 def scan_url(wordlist_slice, base_url, progress_bar):
     global score_200
@@ -143,31 +127,6 @@ def get_ip_address(domain):
     ip_address = socket.gethostbyname(domain)
     return ip_address
 
-def scan_port(ip_address, port, results):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.settimeout(1)
-    try:
-        result = sock.connect_ex((ip_address, port))
-        if result == 0 or port in [80, 443]:
-            service_name = socket.getservbyport(port)
-            results.append((port, service_name))
-    except Exception as e:
-        pass
-    finally:
-        sock.close()
-
-def find_open_ports(ip_address, start_port, end_port):
-    open_ports = []
-    threads = []
-    with tqdm(total=end_port - start_port + 1, desc="Scanning ports") as pbar:
-        for port in range(start_port, end_port + 1):
-            thread = threading.Thread(target=scan_port, args=(ip_address, port, open_ports))
-            threads.append(thread)
-            thread.start()
-            pbar.update(1)
-        for thread in threads:
-            thread.join()
-    return open_ports
 
 def r():
     if len(sys.argv) < 2:
@@ -230,18 +189,6 @@ def show(url):
     print("Domain : " + domain)
     print("Path : " + path)
     print("IP : " + ip)
-    #print("Finding open ports ...")
-    #targetPort = ""
-    #open_ports = find_open_ports(ip, start_port, end_port)
-    #print("Opened ports :")
-    #for port, service_name in open_ports:
-        #print(f"{port} : {service_name}")
-        #if "http" in service_name:
-        #    targetPort = port
-        #if "https" in service_name:
-        #    targetPort = port
-            
-    #print("Spoofer started on port {}".format(targetPort))
     print("Scanner started...")
     scanner(url)
     print("\n\n"+GREEN_BACKGROUND+BLACK_TEXT+"Scan completed"+RESET+"\n")
