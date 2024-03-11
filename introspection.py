@@ -27,10 +27,6 @@ YELLOW_BACKGROUND = "\033[43m"
 GREEN_BACKGROUND = "\033[42m"
 RESET = "\033[0m"
 
-
-start_port = 1
-end_port = 65535
-
 score_200 = 0
 score_301 = 0
 score_403 = 0
