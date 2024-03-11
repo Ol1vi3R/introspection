@@ -97,10 +97,8 @@ def scan_url(wordlist_slice, base_url, progress_bar):
 def scanner(url):
     with open('wordlist.txt', 'r') as file:
         wordlist = file.read().splitlines()
-
     num_threads = 50
     wordlist_slices = [wordlist[i::num_threads] for i in range(num_threads)]
-
     with tqdm(total=len(wordlist), desc="Progression") as progress_bar:
         with ThreadPoolExecutor(max_workers=num_threads) as executor:
             for wordlist_slice in wordlist_slices:
